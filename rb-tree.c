@@ -293,7 +293,7 @@ int rbtree_delete(RBTree T, void *v)
         return 0;
     }
 
-    if (!N->parent) {
+    if (N->color == RED || !N->parent) {
         *parentChildRef(T, N) = NULL;
         T->dealloc(T->alloc_ctx, N, sizeof(*N) + T->elem_size);
     } else delete2(T, N);
